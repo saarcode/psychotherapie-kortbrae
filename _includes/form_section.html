@@ -1,0 +1,53 @@
+{% assign section = include.section %}
+{% assign has_text = false %}
+{% if section.title or section.subtitle or section.content %}
+  {% assign has_text = true %}
+{% endif %}
+<section id="{{ section.section_id }}" class="section section--form">
+  <div class="container container--lg">
+    <div {% assign has_text_is_not_empty = has_text | is_not_empty %}{% if has_text_is_not_empty %}{% endif %}>
+      {% assign has_text_is_not_empty = has_text | is_not_empty %}
+      {% if has_text_is_not_empty %}
+      <div class="section__content cell">
+        {% assign title_is_not_empty = section.title | is_not_empty %}
+        {% if title_is_not_empty %}
+        <h1 class="section__title">{{ section.title }}</h1>
+        {% endif %}
+        {% endif %}
+        <div class="section__form-container{% assign has_text_is_not_empty = has_text | is_not_empty %}{% if has_text_is_not_empty %} cell{% endif %}">
+            {% assign subtitle_is_not_empty = section.subtitle | is_not_empty %}
+            {% if subtitle_is_not_empty %}
+            <p class="section__subtitle">{{ section.subtitle }}</p>
+            {% endif %}
+            {% assign content_is_not_empty = section.content | is_not_empty %}
+            {% if content_is_not_empty %}
+            <div class="section__body text-block">
+            {{ section.content | markdownify }}
+            </div>
+            {% endif %}
+
+            <form name="{{ section.form_id }}" id="{{ section.form_id }}" {% assign form_action_is_not_empty = section.form_action | is_not_empty %}{% if form_action_is_not_empty %}
+            action="{{ section.form_action }}" {% endif %}method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+            <div class="screen-reader-text">
+                <label id="{{ section.form_id }}-bot-label">Nicht ausfüllen, wenn Sie ein Mensch sind: <input
+                    aria-labelledby="{{ section.form_id }}-bot-label" name="bot-field" /></label>
+            </div>
+            <input type="hidden" aria-label="{{ section.form_id }}-name" name="form-name" value="{{ section.form_id }}" />
+            {% for field in section.form_fields %}
+            
+            {% include form_field.html field=field section=section %}
+            {% endfor %}
+            <div class="form-submit">
+                <button type="submit" class="button button--primary">{{ section.submit_label }}</button>
+            </div>
+            </form>
+        </div>
+      {% assign add-text_is_not_empty = section.add-text | is_not_empty %}
+      {% if add-text_is_not_empty %}
+      <div>{{ section.add-text | markdownify }}</div>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d253.5340096185765!2d8.67437182818194!3d50.123879043709145!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd0eb4f683f84b%3A0x7a04cf45bc478785!2sWolfsgangstra%C3%9Fe%2065%2C%2060322%20Frankfurt%20am%20Main!5e0!3m2!1sde!2sde!4v1634239100890!5m2!1sde!2sde" width="600" height="450" allowfullscreen="" loading="lazy"></iframe>
+</section>

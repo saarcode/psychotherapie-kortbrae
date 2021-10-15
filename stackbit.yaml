@@ -1,0 +1,865 @@
+stackbitVersion: ~0.3.0
+ssgName: jekyll
+ssgVersion: 3.8.4
+buildCommand: jekyll build
+publishDir: _site
+staticDir: ''
+uploadDir: images
+dataDir: _data
+pagesDir: ''
+pageLayoutKey: layout
+logicFields:
+  - praxis_section.projects_number
+  - posts_section.posts_number
+models:
+  config:
+    type: data
+    label: Site Configuration
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: Site title
+        required: true
+      - type: string
+        name: domain
+        label: Domain
+        description: >-
+          The domain of your site, including the protocol, e.g.
+          https://mysite.com
+      - type: image
+        name: favicon
+        label: Favicon
+        description: A square icon that represents your website
+      - type: enum
+        name: color_scheme
+        label: Color scheme
+        description: The color scheme used for the site
+        options:
+          - light
+          - dark
+        default: light
+        required: true
+      - type: enum
+        name: accent_color
+        label: Accent color
+        description: The accent color of the site
+        options:
+          - pink
+          - green
+          - blue
+          - violet
+          - white
+        default: pink
+        required: true
+      - type: enum
+        name: base_font
+        label: Font
+        options:
+          - noticia
+          - karla
+          - system-sans
+        default: noticia
+        required: true
+      - type: model
+        name: header
+        label: Header Configuration
+        models:
+          - header
+      - type: model
+        name: footer
+        label: Footer Configuration
+        models:
+          - footer
+    file: config.json
+  header:
+    type: object
+    label: Header Configuration
+    labelField: title
+    fields:
+      - type: string
+        name: title
+        label: Kopf-Titel
+        description: Titel im Kopf wenn es kein Logo-Bild gibt
+      - type: image
+        name: logo
+        label: Logo
+        description: Logo-Bild im Seitenkopf
+      - type: string
+        name: logo_alt
+        label: Logo alt-Text
+        description: alt-Text des Logos fuer Screenreader
+      - type: string
+        name: leitspruch
+        label: Leitspruch
+        description: Leitspruch oben rechts
+      - type: boolean
+        name: has_nav
+        label: Navigations-Menü aktiv
+        description: Navigationsmenue im Seitenkopf anzeigen
+        default: true
+      - type: list
+        name: nav_links
+        label: Navigations-Links
+        description: Liste von Navigations-Links
+        items:
+          type: model
+          models:
+            - action
+  footer:
+    type: object
+    label: Footer-Konfiguration
+    labelField: content
+    fields:
+      - type: string
+        name: content
+        label: Footer-Inhalt
+        description: Der Name im Footer
+      - type: string
+        name: phone
+        label: Telefonnummer
+        description: Die Telefonnummer im Footer 
+      - type: string
+        name: email
+        label: E-Mail
+        description: Die E-Mail-Adresse im Footer
+      - type: string
+        name: slogan
+        label: Slogan
+        description: Der Slogan am Ende des Footers
+      - type: string
+        name: link
+        label: Link
+        description: Der Link auf das Impressum
+      - type: list
+        name: links
+        label: Links
+        description: A list of links displayed in the footer
+        items:
+          type: model
+          models:
+            - action
+      - type: boolean
+        name: has_social
+        label: Soziale Links aktivieren
+        description: Soziale Links im Footer anzeigen
+        default: true
+      - type: list
+        name: social_links
+        label: Soziale Links
+        description: Liste sozialer Links im Footer
+        items:
+          type: model
+          models:
+            - action
+  advanced:
+    type: page
+    label: Advanced Page
+    layout: advanced
+    hideContent: true
+    fields:
+      - type: string
+        name: title
+        label: Titel
+        description: Seitentitel
+        required: true
+      - type: boolean
+        name: hide_title
+        label: Seitentitel verbergen
+        default: true
+      - type: list
+        name: sections
+        label: Abschnitte
+        description: Page sections
+        items:
+          type: model
+          models:
+            - hero_section
+            - content_section
+            - cta_section
+            - grid_section
+            - praxis_section
+            - posts_section
+            - testimonials_section
+            - form_section
+      - type: model
+        name: seo
+        models:
+          - stackbit_page_meta
+  praxis:
+    type: page
+    urlPath: /praxis
+    label: praxis
+    layout: praxis
+    file: praxis/index.md
+    hideContent: true
+    singleInstance: true
+    fields:
+      - type: string
+        name: title
+        label: Titel
+        description: Seitentitel
+        required: true
+      - type: string
+        name: subtitle
+        label: Untertitel
+        description: Text unterhalb des Seitentitels
+      - type: boolean
+        name: hide_title
+        label: Seitentitel und Untertitel verbergen
+        default: false
+      - type: enum
+        name: layout_style
+        label: Layout-Stil
+        description: The style of the praxis layout
+        options:
+          - mosaic
+          - tiles
+        default: mosaic
+      - type: model
+        name: seo
+        models:
+          - stackbit_page_meta
+  page:
+    type: page
+    label: Page
+    layout: page
+    exclude:
+      - blog/**
+      - praxis/**
+    fields:
+      - type: string
+        name: title
+        label: Titel
+        description: Seitentitel
+        required: true
+      - type: string
+        name: subtitle
+        label: Untertitel
+        description: Text unterhalb des Seitentitels
+      - type: image
+        name: image
+        label: Bild
+        description: Bild unterhalb Seitentitel und Untertitel
+      - type: string
+        name: image_alt
+        label: Alternativtext des Bildes
+        description: The alt text of the image
+      - type: model
+        name: seo
+        models:
+          - stackbit_page_meta
+  post:
+    type: page
+    urlPath: '/blog/{slug}'
+    label: Post
+    layout: post
+    folder: blog
+    fields:
+      - type: string
+        name: title
+        label: Titel
+        description: Beitragstitel
+        required: true
+      - type: string
+        name: subtitle
+        label: Untertitel
+        description: Text unterhalb des Beitragstitels
+      - type: date
+        name: date
+        label: Datum
+        required: true
+      - type: image
+        name: thumb_image
+        label: Vorschaubild
+        description: Bild im Beitragsraster
+      - type: string
+        name: thumb_image_alt
+        label: Alternativtext Vorschaubild
+        description: The alt text of the thumbnail image
+      - type: image
+        name: image
+        label: Bild
+        description: Bild des Beitrags
+      - type: string
+        name: image_alt
+        label: Alternativtext des Bildes
+        description: The alt text of the single post image
+      - type: string
+        name: excerpt
+        label: Zusammenfassung
+        description: Zusammenfassungs des Beitrags in der Uebersicht
+      - type: model
+        name: seo
+        models:
+          - stackbit_page_meta
+  project:
+    type: page
+    urlPath: '/praxis/{slug}'
+    label: Project
+    layout: project
+    folder: praxis
+    hideContent: false
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the project
+        required: true
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The text shown just below the project title
+      - type: date
+        name: date
+        label: Date
+        required: true
+      - type: image
+        name: thumb_image
+        label: Thumbnail image
+        description: The image shown in the praxis grid
+      - type: string
+        name: thumb_image_alt
+        label: Thumbnail image alt text
+        description: The alt text of the thumbnail image
+      - type: markdown
+        name: more-content
+        label: Weiterer Textteil (Mitte)
+      - type: string
+        name: quote
+        label: Zitat
+        description: Zitatext für den blauen Baustein-Kasten
+      - type: string
+        name: author
+        label: Autor
+        description: Urheber des Textzitats
+      - type: markdown
+        name: bottom-text
+        label: Unterer Textteil
+      - type: list
+        name: sections
+        label: Sections
+        description: Project sections
+        items:
+          type: model
+          models:
+            - image_section
+      - type: model
+        name: seo
+        models:
+          - stackbit_page_meta
+  section:
+    type: object
+    label: Section
+    labelField: title
+    fields:
+      - type: string
+        name: section_id
+        label: ID
+        description: 'A unique identifier of the section, must not contain whitespace'
+      - type: string
+        name: title
+        label: Title
+        description: The title of the section
+  hero_section:
+    type: object
+    label: Hero Section
+    extends:
+      - section
+    fields:
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the section
+      - type: string
+        name: contact
+        label: Kontaktzeile
+        description: Hinweis auf das Kontaktformular
+      - type: list
+        name: actions
+        label: Action buttons
+        items:
+          type: model
+          models:
+            - action
+  hero-card_section:
+    type: object
+    label: Rechte Spalte
+    extends:
+      - section
+    fields:
+      - type: string
+        name: title
+        label: Name
+        description: Der Name auf der Visitenkarte
+      - type: string
+        name: occupation
+        label: Beruf
+        description: Die Berufsangabe auf der Visitenkarte        
+      - type: string
+        name: street
+        label: Straße
+        description: Die Straßenangabe auf der Visitenkarte
+      - type: string
+        name: city
+        label: PLZ und Stadt
+        description: Die Stadt auf der Visitenkarte
+      - type: string
+        name: phone
+        label: Telefon
+        description: Die Telefonnummer auf der Visitenkarte
+      - type: image
+        name: image
+        label: Bild
+        description: The image of the section
+  citations_section:
+    type: object
+    label: Zitatspalte
+    extends:
+      - section
+    fields:
+      - type: string
+        name: quote
+        label: Zitat
+        description: Der Zitattext
+      - type: string
+        name: author
+        label: Autor
+        description: Der Name des Autors
+  content_section:
+    type: object
+    label: Content Section
+    extends:
+      - section
+    fields:
+      - type: string
+        name: subtitle
+        label: Untertitel
+        description: The subtitle of the section
+      - type: image
+        name: image
+        label: Bild
+        description: The image of the section
+      - type: string
+        name: image_alt
+        label: Image alt text
+        description: The alt text of the section image
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the section
+  cta_section:
+    type: object
+    label: CTA Section
+    extends:
+      - section
+    fields:
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the section
+      - type: list
+        name: actions
+        label: Action buttons
+        items:
+          type: model
+          models:
+            - action
+      - type: image
+        name: image
+        label: Image
+        description: The image of the section
+      - type: string
+        name: image_alt
+        label: Image alt text
+        description: The alt text of the section image
+      - type: enum
+        name: bg_color
+        label: Background color
+        description: The background color of the section
+        options:
+          - none
+          - light
+        default: none
+        required: true
+  grid_section:
+    type: object
+    label: Grid Section
+    extends:
+      - section
+    fields:
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The subtitle of the section
+      - type: enum
+        name: col_number
+        label: Columns
+        description: The number of columns in the grid
+        options:
+          - two
+          - three
+        default: three
+        required: true
+      - type: list
+        name: grid_items
+        label: Grid items
+        items:
+          type: model
+          models:
+            - grid_item
+  grid_item:
+    type: object
+    label: Grid item
+    labelField: title
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The title of the grid item
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The subtitle of the grid item
+      - type: image
+        name: image
+        label: Image
+        description: The image of the grid item
+      - type: string
+        name: image_alt
+        label: Image alt text
+        description: The alt text of the grid image
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the grid item
+      - type: list
+        name: actions
+        label: Action buttons
+        items:
+          type: model
+          models:
+            - action
+  praxis_section:
+    type: object
+    label: praxis
+    extends:
+      - section
+    fields:
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The subtitle of the section
+      - type: enum
+        name: layout_style
+        label: Layout Style
+        description: The layout style of the projects section
+        options:
+          - mosaic
+          - tiles
+        default: mosaic
+        required: true
+      - type: number
+        name: projects_number
+        label: Number of projects to display
+        required: true
+      - type: string
+        name: view_all_label
+        label: All projects button label
+        description: The text displayed inside the button
+      - type: string
+        name: view_all_url
+        label: All projects button URL
+        default: '#'
+  posts_section:
+    type: object
+    label: Posts Section
+    extends:
+      - section
+    fields:
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The subtitle of the section
+      - type: number
+        name: posts_number
+        label: The number of posts to display
+        required: true
+        default: 3
+      - type: enum
+        name: col_number
+        label: Columns
+        description: The number of columns in the post grid
+        options:
+          - two
+          - three
+        default: three
+        required: true
+      - type: list
+        name: actions
+        label: Action buttons
+        items:
+          type: model
+          models:
+            - action
+  testimonials_section:
+    type: object
+    label: Testimonials Section
+    extends:
+      - section
+    fields:
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The subtitle of the section
+      - type: list
+        name: testimonials
+        label: Testimonials
+        items:
+          type: model
+          models:
+            - testimonial
+  testimonial:
+    type: object
+    label: Testimonial
+    labelField: author
+    fields:
+      - type: string
+        name: author
+        label: Author
+        description: The author of the testimonial
+        required: true
+      - type: string
+        name: position
+        label: Author position
+        description: The position of the testimonial author
+        required: true
+      - type: image
+        name: avatar
+        label: Author image
+        description: The image of the testimonial author
+      - type: string
+        name: avatar_alt
+        label: Author image alt text
+        description: The alt text of the testimonial author image
+      - type: string
+        name: content
+        label: Content
+        description: The text content of the testimonial
+        required: true
+  form_section:
+    type: object
+    label: Form Section
+    extends:
+      - section
+    fields:
+      - type: string
+        name: title
+        label: Überschrift
+        description: Seitenüberschrift
+      - type: string
+        name: subtitle
+        label: Subtitle
+        description: The subtitle of the section
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the section
+      - type: markdown
+        name: add-text
+        label: Weitere Infos
+        description: zusätzlicher Text unter dem Kontakt-Formular
+      - type: string
+        name: form_id
+        label: Form ID
+        description: 'A unique identifier of the form, must not contain whitespace'
+        required: true
+      - type: string
+        name: form_action
+        label: Form action
+        description: >-
+          The path of your custom "success" page, if you want to replace the
+          default success message
+      - type: list
+        name: form_fields
+        label: Form fields
+        items:
+          type: model
+          models:
+            - form_field
+      - type: boolean
+        name: hide_labels
+        label: Hide form field labels
+        default: false
+      - type: string
+        name: submit_label
+        label: Submit button label
+        required: true
+  form_field:
+    type: object
+    label: Form field
+    labelField: name
+    fields:
+      - type: enum
+        name: input_type
+        label: Type
+        options:
+          - text
+          - textarea
+          - email
+          - tel
+          - number
+          - checkbox
+          - select
+        description: Type of the form field
+        required: true
+      - type: string
+        name: name
+        label: Name
+        description: 'The name of the field, submitted with the form'
+        required: true
+      - type: string
+        name: label
+        label: Label
+        description: 'The caption of the field, shown above the field input'
+      - type: string
+        name: default_value
+        label: Placeholder or default value
+        description: >-
+          The placeholder for textual field types or default option for select
+          field
+      - type: list
+        name: options
+        label: Options
+        description: A list of options for select field
+      - type: boolean
+        name: is_required
+        label: Make the field required
+        default: false
+  text_section:
+    type: object
+    label: Text Section
+    fields:
+      - type: markdown
+        name: content
+        label: Content
+        description: The text content of the section
+  image_section:
+    type: object
+    label: Image Section
+    fields:
+      - type: image
+        name: image
+        label: Image
+        description: The image of the section
+      - type: string
+        name: image_alt
+        label: Image Alt Text
+        description: The alt text of the section image
+      - type: string
+        name: caption
+        label: Caption
+        description: The caption of the image
+      - type: enum
+        name: width
+        label: Width
+        description: The width of the image
+        options:
+          - regular
+          - wide
+        default: regular
+        required: true
+  action:
+    type: object
+    label: Action
+    labelField: label
+    fields:
+      - type: string
+        name: label
+        label: Label
+        required: true
+      - type: string
+        name: url
+        label: URL
+        required: true
+        default: '#'
+      - type: enum
+        name: style
+        label: Style
+        options:
+          - link
+          - button
+          - icon
+        default: link
+        required: true
+      - type: enum
+        name: icon
+        label: Icon
+        options:
+          - facebook
+          - instagram
+          - linkedin
+          - pinterest
+          - twitter
+          - vimeo
+          - youtube
+        default: lotos
+      - type: boolean
+        name: new_window
+        label: Make the link open a new tab/window
+        default: false
+      - type: boolean
+        name: no_follow
+        label: No follow
+        default: false
+        description: Add rel="nofollow" attribute to the link
+  stackbit_page_meta:
+    type: object
+    label: Page meta data
+    fields:
+      - type: string
+        name: title
+        label: Title
+        description: The page title that goes into the <title> tag
+        default: ''
+      - type: string
+        name: description
+        label: Description
+        description: The page description that goes into the <meta name="description"> tag
+        default: ''
+      - type: list
+        name: robots
+        label: Robots
+        description: The items that go into the <meta name="robots"> tag
+        items:
+          type: enum
+          options:
+            - all
+            - index
+            - follow
+            - noindex
+            - nofollow
+            - noimageindex
+            - notranslate
+            - none
+      - type: list
+        name: extra
+        label: Extra
+        description: >-
+          Additional definition for specific meta tags such as open-graph,
+          twitter, etc.
+        items:
+          type: object
+          labelField: name
+          fields:
+            - type: string
+              name: name
+              default: ''
+            - type: string
+              name: value
+              default: ''
+            - type: string
+              name: keyName
+              default: name
+            - type: boolean
+              name: relativeUrl

@@ -1,0 +1,34 @@
+{% assign section = include.section %}
+<section>
+<div id="{{ section.section_id }}" class="container">
+            <div id="rightTop">
+                <img id="profilBild" src="../images/Home_schmal165.jpg" alt="Profil">
+                {% assign title_is_not_empty = section.title | is_not_empty %}
+                {% if title_is_not_empty %}
+                <h4>{{ section.title }}</h4>
+                {% endif %}
+                {% assign occupation_is_not_empty = section.occupation | is_not_empty %}
+                {% if occupation_is_not_empty %}
+                <p>{{ section.occupation }}</p>                
+                {% endif %}
+                {% assign strasse_is_not_empty = section.street | is_not_empty %}
+                {% if strasse_is_not_empty %}
+                <p>{{ section.street }}</p>
+                {% endif %}
+                {% assign city_is_not_empty = section.city | is_not_empty %}
+                {% if city_is_not_empty %}
+                <p>{{ section.city }}</p>
+                {% endif %}
+                {% assign phone_is_not_empty = section.phone | is_not_empty %}
+                {% if phone_is_not_empty %}
+                <p>Tel.: {{ section.phone }}</p>
+                {% endif %}
+            </div>
+            <div id="rightBottom">
+                {% assign image_is_not_empty = section.image |is_not_empty %}
+                {% if image_is_not_empty %}
+                <img src="{{ section.image }}" alt="Praxisräume">
+                {% endif %}
+            </div>
+        </div>
+</section>

@@ -1,0 +1,78 @@
+{
+    "title": "Psychotherapie & Coaching Praxis Sabine Kortbrae",
+    "color_scheme": "light",
+    "accent_color": "white",
+    "base_font": "noticia",
+    "header": {
+        "title": "Psychotherapie & Coaching Praxis Sabine Kortbrae",
+        "logo": "../images/therapie-und-coaching1.jpg",
+        "logo_alt": "Praxislogo Sabine Kortbrae",
+        "leitspruch": "Praxis Sabine Kortbrae",
+        "has_nav": true,
+        "nav_links": [
+            {
+                "label": "Home",
+                "url": "/",
+                "style": "link"
+            },
+            {
+                "label": "Über mich",
+                "url": "/praxis/ueber-mich",
+                "style": "link"
+            },
+            {
+                "label": "Mein Angebot",
+                "url": "/praxis/mein-angebot",
+                "style": "link",
+                "icon": "lotos",
+                "new_window": false,
+                "no_follow": false
+            },
+            {
+                "label": "Therapie",
+                "url": "/praxis/therapie",
+                "style": "link",
+                "icon": "lotos",
+                "new_window": false,
+                "no_follow": false
+            },
+            {
+                "label": "Coaching",
+                "url": "/coaching",
+                "style": "link"
+            },
+            {
+                "label": "Kontakt & Anfahrt",
+                "url": "/kontakt/",
+                "style": "link"
+            }
+        ]
+    },
+    "footer": {
+        "content": "Praxis Sabine Kortbrae",
+        "phone": "069 – 13 39 12 67",
+        "email": "kontakt@psychotherapie-kortbrae.de",
+        "has_social": false,
+        "link-impressum": "impressum",
+        "link-datenschutz": "datenschutz",
+        "link-kosten": "kosten",
+        "social_links": [
+            {
+                "label": "Facebook",
+                "url": "https://www.facebook.com",
+                "style": "icon",
+                "icon": "facebook",
+                "new_window": true
+            },
+            {
+                "label": "Instagram",
+                "url": "https://www.instagram.com",
+                "style": "icon",
+                "icon": "instagram",
+                "new_window": true
+            }
+        ]
+    },
+    "domain": "https://diligent-artichoke-f7734.netlify.app",
+    "favicon": "images/favicon.ico"
+}

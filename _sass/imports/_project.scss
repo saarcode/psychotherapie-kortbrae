@@ -1,0 +1,119 @@
+.project {
+  background: $color-bkg-neutral;
+  padding: 2rem 1rem;
+
+  &__header, &__title {
+      display: inline-block;
+  }
+
+  &__title {
+    margin: 0;
+  }
+  
+  &__subtitle {
+    color: $color-gray-300;
+    font-size: 1.22222em;
+    line-height: 1.4;
+    margin-top: 0.5em;
+  }
+
+  &__body figure.container, figure.container--lg {
+    margin-left: 0;
+  }
+
+  .text-block {
+      margin-top: -1rem;
+  }
+
+  .subgrid {
+      display: grid;
+      grid-template-columns: 1fr .5fr 1fr;
+      grid-template-areas: 
+        "left left right"
+        "centerLeft centerRight centerRight"
+        "bottom bottom bottom";
+      grid-gap: 2rem;
+  }
+  
+  .topLeft {
+      grid-area: left;
+  }
+
+  figure.topRight {
+      grid-area: right;
+      margin: initial;
+  }
+
+
+  figure img {        
+        border: 1px solid #DDD;
+    }
+  .centerLeft {
+      grid-area: centerLeft;
+      padding: 2rem;
+      background-color: $color-secondary;
+  }
+  blockquote#tvZitate {
+      margin: 2rem 0;
+      margin-left: -1.5rem;
+      font-size: 1.25rem;
+      color: #fff;
+  }
+  blockquote#tvZitate::before { 
+      left: 1.75rem;
+  }
+  cite#tvZitatquelle {
+      font-size: 1rem;
+      color: #fff;
+      font-style: italic;
+  }
+  .centerRight {
+      grid-area: centerRight;
+  }
+  .bottom {
+      grid-area: bottom;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .project {
+    padding: 2rem;
+    border-bottom: 1px solid #ddd;
+    
+    &__subtitle {
+      font-size: 1.33333em;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+    .project figure img {
+        margin-right: 6vw;
+    }
+}
+
+@media only screen and (max-width: 948px) {
+    .project {
+      figure img {
+        max-width: calc(100% + 6vw);
+      }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .section--portfolio {
+        margin-bottom: 0;
+    }
+    .project .subgrid {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "right"
+            "left"
+            "centerRight"
+            "bottom"
+            "centerLeft";
+    }
+    .project figure.topRight {
+        margin: auto;
+    }
+}

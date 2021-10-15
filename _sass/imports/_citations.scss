@@ -1,0 +1,53 @@
+#citations {
+    background: linear-gradient(315deg, $color-tertiary, $color-secondary);
+    margin-top: -17rem;
+    padding: 2rem 0;
+}
+
+#ZitateUnten {
+    margin: auto;
+    padding: 3rem;
+    padding-bottom: 0;
+    height: 275px;     
+    max-width: 370px;   
+}
+
+#ZitateUnten blockquote {
+    font-size: 36px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#ZitateUnten cite {
+    font-size: 24px;
+    color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+    #citations {
+        margin-top: 0;
+        padding: 1rem 0 0 0;
+        box-shadow: inset 0px 0px 100px -10px #1a72b0;
+    }
+    #ZitateUnten {
+        margin: 0;
+        max-width: 316px;
+        height: 300px;     
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #ZitateUnten blockquote {
+        width: 85%;
+        margin: auto;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+    }
+
+    #ZitateUnten blockquote::before {
+        left: -1.5rem;
+        top: -2.25rem;
+    }
+}

@@ -1,0 +1,80 @@
+---
+layout: body
+---
+
+<article class="project">
+  <header class="project__header">
+    <div class="container container--md">
+      <h1 class="project__title">{{ page.title }}</h1>
+    </div>
+  </header>
+  <div class="project__body">
+      {% for section in page.sections %}
+        
+        {% assign component = section.type | append: ".html" %}
+        {% include {{ component }} section=section site=site %}
+      {% endfor %}
+  </div>
+  <div class="text-block container container--md">
+      <div class="subgrid">
+        <div class="topLeft">{{ content }}</div>
+        <figure class="topRight">
+            {% assign main-image_is_not_empty = page.main-image | is_not_empty %}
+            {% if main-image_is_not_empty %}            
+            <img src="../{{ page.main-image }}" alt="{{ page.main-image_alt }}" />
+            {% endif %}
+        </figure>
+        <div id="left" class="centerLeft">
+            {% assign quote_is_not_empty = page.quote | is_not_empty %}
+            {% if quote_is_not_empty %}
+            <blockquote id="tvZitate">{{ page.quote }}</blockquote>
+            {% endif %}
+            {% assign author_is_not_empty = page.author | is_not_empty %}
+            {% if author_is_not_empty %}
+            <cite id="tvZitatquelle">{{ page.author }}</cite>
+            {% endif %}
+        </div>
+        <div class="centerRight">
+            {% assign more-content_is_not_empty = page.more-content | is_not_empty %}
+            {% if more-content_is_not_empty %}
+            {{ page.more-content | markdownify }}
+            {% endif %}
+        </div>
+        <div class="bottom">
+            {% assign bottom-text_is_not_empty = page.bottom-text | is_not_empty %}
+            {% if bottom-text_is_not_empty %}
+            {{ page.bottom-text | markdownify }}
+            {% endif %}
+        </div>
+      </div>
+    </div>
+</article>
+
+{% assign projects_sorted = '/praxis' | get_pages | sort: 'date' | reverse %}
+{% for project_item in projects_sorted %}
+  {% if project_item.url == page.url %}
+    {% assign curr_index = forloop.index0 %}
+    {% assign next_index = curr_index | plus: 1 %}
+    {% assign prev_index = curr_index | minus: 1 %}
+    {% assign project_index_length = forloop.length | minus: 1 %}
+    {% if project_index_length > 0 %}
+    <nav class="section section--portfolio">
+      <div class="container container--lg">
+        <h2 class="section__title line-top">Mehr</h2>
+        <div class="grid portfolio-feed portfolio-feed--tiles">
+          {% if curr_index != 0 %}
+            {% assign prev_project = projects_sorted[prev_index] %}
+            
+            {% include praxis_item.html project_page=prev_project %}
+          {% endif %}
+          {% if curr_index < project_index_length %}
+            {% assign next_project = projects_sorted[next_index] %}
+            
+            {% include praxis_item.html project_page=next_project %}
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    {% endif %}
+  {% endif %}
+{% endfor %}

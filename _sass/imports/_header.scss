@@ -1,0 +1,281 @@
+.site-header {
+  height: 143px;
+  background: #fff;
+  box-shadow: 0 3px 9px 0 rgba(10,10,10,.1);
+}
+
+#masthead {
+  position: relative;
+  z-index: 1;
+  padding-left: 40px;
+  padding-right: 3rem;
+}
+
+#head {
+  padding: 30px 0;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+}
+
+#lotos {
+    max-height: 92px;
+}
+
+#psychotherapie {
+    width: 340px;
+    height: 62px;
+}
+
+.navbar {
+  -ms-flex-align: center;
+  align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: flex-start;
+
+  &__logo,
+  &__title {
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+  }
+
+  &__logo {
+    position: relative;
+    display: inline;
+    top: 14px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noticia',sans-serif;
+    font-weight: 100;
+    color: #1a72b0;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  &__title {
+    color: $color-gray-800;
+    font-size: 1.33333em;
+    font-weight: bold;
+    line-height: 1.1;
+
+    .font-fraunces & {
+      font-weight: 500;
+    }
+  }
+
+  &__toggle {
+    background: 0;
+    border: 0;
+    color: inherit;
+    height: 30px;
+    padding: 0;
+    position: relative;
+    width: 30px;
+  }
+}
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  &__item {
+      color: #1a72b0;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar {
+    &__toggle {
+      display: none;
+    }
+
+    &__menu-container {
+       margin-left: 0;
+    }
+
+    &__scroller {
+        margin-top: -20px;
+    }
+  }
+
+  .menu {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+
+    &__item {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-right: 1.5em;
+      margin-bottom: -5px;
+      padding: 10px 14px;
+    }
+    
+    &__item:hover,
+    a:not(.button):hover {
+      background-color: #1a72b0;
+      color: #fff;
+      border-radius: 4px 4px 0 0;
+    }
+
+    &__item--current {
+      padding: 10px 14px;
+      background-color: #1a72b0;
+      color: #fff;
+      border-radius: 4px 4px 0 0;
+    }
+    &__item:first-child > a > .icon {
+      margin-left: -19px;
+      width: 2em;
+      height: 2em;            
+    }
+
+    .button--primary {
+      padding: 0.275em 0.5em;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .site-header {
+    height: 70px;
+    &:after {
+      background: rgba(255,255,255,.6);
+      content: "";
+      height: 100vh;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      -webkit-transition: opacity .25s, visibility 0s .25s;
+      transition: opacity .25s, visibility 0s .25s;
+      visibility: hidden;
+      width: 100%;
+      z-index: 998;
+    }
+  }
+
+  .navbar {
+    &__menu-container {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background-color: #fff;
+      box-sizing: border-box;
+      bottom: 0;
+      margin: 0;
+      -webkit-overflow-scrolling: touch;
+      position: fixed;
+      left: -100%;
+      top: 0;
+      -webkit-transition: left .3s cubic-bezier(.65,.05,.36,1), visibility 0s .3s;
+      transition: left .3s cubic-bezier(.65,.05,.36,1), visibility 0s .3s;
+      visibility: hidden;
+      width: 100%;
+      z-index: 999;
+    }
+
+    &__scroller {
+      height: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+
+    &__logo {
+        display: none;
+    }
+  }
+
+  .js-nav-open {
+    overflow: hidden;
+
+    .site-header {
+      &:after {
+        opacity: 1;
+        -webkit-transition: opacity .25s;
+        transition: opacity .25s;
+        visibility: visible;
+      }
+    }
+
+    .navbar__menu-container {
+      left: 0;
+      -webkit-transition: left .3s ease;
+      transition: left .3s ease;
+      visibility: visible;
+    }
+  }
+
+  #navbar {
+    &__open {
+      display: block;
+      position: absolute;
+      top: 1.25rem;
+      left: 1.5rem;
+    }
+
+    &__close {
+      display: block;
+      position: absolute;
+      right: 3vw;
+      top: 1rem;
+    }
+  }
+
+  .menu {
+    padding: 3.66667em 3vw 3.33333em;
+
+    a {
+      &:not(.button) {
+        display: block;
+        font-size: 2em;
+        line-height: 1.2;
+        padding: 0.25em 0;
+      }
+    }
+
+    .button {
+      font-size: 1.11111em;
+      margin: 1em 0;
+    }
+    &__item:first-child > a > .icon {
+      width: 3em;
+      height: 3em;   
+      margin-bottom: -1rem;    
+      margin-left: -1.75rem;     
+    }
+  }
+
+    .menu a:not(.button):hover, .menu__item--current a {
+      color: hsla(205, 74, 20,1);
+    }
+
+  #logobild {
+      display: none;
+  }
+
+  #psychotherapie {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 225px;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .menu {
+    a {
+      &:not(.button) {
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+

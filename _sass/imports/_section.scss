@@ -1,0 +1,221 @@
+.section {
+  &__bg {
+    background-color: $color-gray-50;
+    padding: 1.66667em;
+
+    @media only screen and (min-width: 601px) {
+      padding: 2.5em;
+    }
+  }
+
+  &__title,
+  &__subtitle,
+  &__body {
+    max-width: $container-md;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  
+  &__form-container {
+    box-sizing: border-box;        
+    position: relative;
+    width: 80%;        
+    min-height: 300px;
+    margin: 20px 0 40px 0;
+    padding: 2rem;
+    background-color: #fff;
+    border: 1px solid #DDD;
+  }
+
+  &__subtitle {
+    color: $color-gray-300;
+    font-size: 0.88889em;
+    line-height: 1.5;
+    margin: 0.5em 0 0;
+    margin-top: 0;
+    color: $color-tertiary;
+    font-weight: bold;
+    font-size: 20px;
+    font-style: italic;
+  }
+
+  &__body,
+  &__actions {
+    &:not(:first-child) {
+      margin-top: 1.66667em;
+    }
+  }
+
+  &__image {
+    &:not(:first-child) {
+      margin-top: 2.5em;
+    }
+  }
+
+  &__body h4 {
+    hyphens: auto;
+  }
+
+  &__body h3#mein-studio {
+      text-decoration: underline;
+  }
+  .grid {
+    &:not(:first-child) {
+      margin-top: 1.5em;
+    }
+  }
+
+  .cell {
+    margin-bottom: 3.5rem;
+  }
+
+  &.section--header {
+    margin-bottom: 2.5em;
+  }
+
+  &--text {
+    padding-bottom: 1.66667em;
+  }
+
+  &--form {
+      form {
+          margin-top: 2rem;
+          width: 100%;
+      }
+      padding: 2rem 1rem;
+    mark {
+        color: #fff;
+        background-color: #e12020;
+        padding: 5px 10px;
+    }
+
+    @media only screen and (min-width: 768px) {  
+        width: calc(100vw - 40px - 3rem);
+        padding: 2rem;
+        & .container {
+            padding-left: .6vw;
+        }
+        form {
+          width: 85%;
+        }
+    }
+    @media only screen and (min-width: 1182px) { 
+        width: calc(1124px - 2rem);
+    }
+    @media only screen and (min-width: 1238px) {
+        width: calc(1152px - 2rem);
+    }
+  }
+
+  &--cta {
+    .grid {
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .button {
+      font-size: inherit;
+    }
+
+    .section {
+      &__title {
+        font-size: 2.22222em;
+      }
+
+      &__content,
+      &__image {
+        margin-bottom: 0.83333em;
+        margin-top: 0.83333em;
+      }
+
+      &__image {
+        text-align: center;
+      }
+
+      &__content {
+        &:only-child {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: $container-md;
+          text-align: center;
+
+          .button-group {
+            -ms-flex-pack: center;
+            justify-content: center;
+
+            a {
+              margin-left: 0.5em;
+              margin-right: 0.5em;
+            }
+          }
+        }
+      }
+
+      @media only screen and (min-width: 601px) {
+        &__title {
+          font-size: 2.44444em;
+        }
+      }
+
+      @media only screen and (min-width: 768px) {
+        &__content {
+          -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+          max-width: 50%;
+          order: -1;
+        }
+
+        &__image {
+          -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+          max-width: 50%;
+        }
+      }
+    }
+  }
+  mark {
+      letter-spacing: .5px;
+  }
+  iframe {
+      width: 85%;
+      border: 1px solid #ddd;
+      padding: 1px;
+      margin: -2rem 0 3rem 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+    .section--header .container--lg, .section--form .container--lg {
+        margin: 0;
+    }    
+    .section .cell {
+        max-width: 370px;
+        margin: 2.5rem auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #contact-form.section .cell .cell {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .project-card__title {
+        text-align: center;
+        letter-spacing: 0;
+        font-size: 1.5rem;
+        line-height: 1.5;
+    }
+    .project-card__image {
+        margin-bottom: 0;
+    }
+    .section__form-container {
+        width: calc(1152px - 2rem);
+    }
+    .section iframe {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
